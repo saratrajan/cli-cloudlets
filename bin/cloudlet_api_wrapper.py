@@ -37,7 +37,7 @@ class Cloudlet(object):
         group_id_list : List
             group_response_json with list of all groupIds
         """
-        cloudlet_group_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/group-info'
+        cloudlet_group_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/group-info'
 
         cloudlet_group_response = session.get(self.form_url(cloudlet_group_url))
         return cloudlet_group_response
