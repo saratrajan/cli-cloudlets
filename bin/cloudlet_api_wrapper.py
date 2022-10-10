@@ -61,11 +61,11 @@ class Cloudlet(object):
         policies_response = None
         if cloudlet_id == 'optional':
             policies_url = 'https://' + self.access_hostname + \
-                           '/cloudlets/api/v2/policies'
+                           '/cloudlets/api/v3/policies'
         #bug with list cloudlets api (cloudletId query string not working)
         #else:
         #    policies_url = 'https://' + self.access_hostname + \
-        #                   '/cloudlets/api/v2/policies?cloudletId=' + str(cloudlet_id)
+        #                   '/cloudlets/api/v3/policies?cloudletId=' + str(cloudlet_id)
         policies_response = session.get(self.form_url(policies_url))
         return policies_response
 
@@ -88,7 +88,7 @@ class Cloudlet(object):
         """
         policies_response = None
         policies_url = 'https://' + self.access_hostname + \
-                           '/cloudlets/api/v2/policies?offset=' + str(offset) + '&pageSize=' + str(page_size) 
+                           '/cloudlets/api/v3/policies?offset=' + str(offset) + '&pageSize=' + str(page_size) 
 
         policies_response = session.get(self.form_url(policies_url))
         return policies_response
@@ -116,7 +116,7 @@ class Cloudlet(object):
             "Content-Type": "application/json"
         }
 
-        cloudlet_policy_create_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/'
+        cloudlet_policy_create_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/'
 
         if clone_policy_id != 'optional':
             cloudlet_policy_create_url = cloudlet_policy_create_url + '?clonePolicyId='+ str(clone_policy_id)
@@ -147,7 +147,7 @@ class Cloudlet(object):
             Json object details of specific cloudlet policy
         """
 
-        policy_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/' + \
+        policy_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/' + \
                               str(policy_id) 
 
         policy_response = session.get(self.form_url(policy_url))
@@ -172,10 +172,10 @@ class Cloudlet(object):
         """
         if page_size == 'optional':
             cloudlet_policy_versions_url = 'https://' + self.access_hostname + \
-                                           '/cloudlets/api/v2/policies/' + str(
+                                           '/cloudlets/api/v3/policies/' + str(
                                                policy_id) + '/versions?includeRules=true'
         else:
-            cloudlet_policy_versions_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/' + \
+            cloudlet_policy_versions_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/' + \
                                            str(policy_id) + '/versions?includeRules=true&pageSize=' + str(page_size)
 
 
@@ -200,7 +200,7 @@ class Cloudlet(object):
             Json object details of specific cloudlet policy
         """
 
-        policy_version_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/' + \
+        policy_version_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/' + \
                               str(policy_id) + '/versions/' + str(version) + '?omitRules=false'
 
         policy_version_response = session.get(self.form_url(policy_version_url))
@@ -230,9 +230,9 @@ class Cloudlet(object):
         }
         if clone_version == 'optional':
             cloudlet_policy_create_url = 'https://' + self.access_hostname + \
-                '/cloudlets/api/v2/policies/' + str(policy_id) + '/versions' + '?includeRules=true'
+                '/cloudlets/api/v3/policies/' + str(policy_id) + '/versions' + '?includeRules=true'
         else:
-            cloudlet_policy_create_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/' + \
+            cloudlet_policy_create_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/' + \
                 str(policy_id) + '/versions' + '?includeRules=true&cloneVersion=' + clone_version
 
         cloudlet_policy_create_response = session.post(self.form_url(cloudlet_policy_create_url), data, headers=headers)
@@ -261,7 +261,7 @@ class Cloudlet(object):
             "Content-Type": "application/json"
         }
 
-        update_policy_version_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/' + \
+        update_policy_version_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/' + \
             str(policy_id) + '/versions/' +  str(version)
 
         update_policy_version_response = session.put(self.form_url(update_policy_version_url), data, headers=headers)
@@ -296,7 +296,7 @@ class Cloudlet(object):
         data['additionalPropertyNames'] = additionalPropertyNames
 
         cloudlet_policy_activate_url = 'https://' + self.access_hostname + \
-            '/cloudlets/api/v2/policies/' + str(policy_id) + '/versions/' + str(version) + '/activations'
+            '/cloudlets/api/v3/policies/' + str(policy_id) + '/versions/' + str(version) + '/activations'
 
         cloudlet_policy_activate_response = session.post(self.form_url(cloudlet_policy_activate_url), json.dumps(data), headers=headers)
         return cloudlet_policy_activate_response
@@ -322,7 +322,7 @@ class Cloudlet(object):
             Json object details of activation history
         """
 
-        policy_activations_url = 'https://' + self.access_hostname + '/cloudlets/api/v2/policies/' + \
+        policy_activations_url = 'https://' + self.access_hostname + '/cloudlets/api/v3/policies/' + \
                               str(policy_id) + '/activations?network=' + str(network)
 
         policy_activations_response = session.get(self.form_url(policy_activations_url))
